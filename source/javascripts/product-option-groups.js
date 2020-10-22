@@ -65,15 +65,20 @@ function setInitialProductOptionStatuses(product) {
           }
         }
         product_iterator++;
+        //console.log("   2. name: " + product_option.name + " price: " + product_option.price +" num options: " + num_options + " sold out: " + num_sold_out);
       }
     }
     dropdown_select = $(".product_option_group option[value='" + option_group_value_id + "']");
-    if (num_options === 0 || product_iterator === num_sold_out || num_options === num_sold_out) {
-      if (num_options === 0) {
+    //console.log("   2 " + product.options[pogv].name + " quantity: " + product.options[pogv].quantity + " price: " + product.options[pogv].price);
+
+    if (product.options[pogv].price == 1000 || num_options === 0 || product_iterator === num_sold_out || num_options === num_sold_out) {
+      if (product.options[pogv].price == 1000 || num_options === 0) {
         disable_type = "unavailable";
+          //console.log("initialization unavailable " + product_option.name);
       }
       if (product_iterator === num_sold_out || num_options === num_sold_out) {
         disable_type = "sold-out";
+          //console.log("initialization disable " + product_option.name);
       }
       disableSelectOption(dropdown_select,disable_type);
     }
@@ -118,17 +123,29 @@ function processAvailableDropdownOptions(product, changed_dropdown) {
                 if (product_option.sold_out) {
                   num_sold_out++;
                 }
+                //console.log(product_option.name + " quantity: " + product_option.quantity + " price: " + product_option.price +" num options: " + num_options + " sold out: " + num_sold_out);
               }
               product_iterator++;
             }
           }
           dropdown_select = $(".product_option_group option[value='" + option_group_value.id + "']");
+          //console.log("name: " + option_group_value.name + " quantity: " + option_group_value.quantity + " price: " + option_group_value.price +" num options: " + num_options + " sold out: " + num_sold_out);
+          
+          // Removes second select option menu if the price is set to $6969
+          //    sets the disable_type to "unavailable"
+          if(product_option && product_option.price == 6969) {
+            disable_type = "unavailable";
+            //console.log("should come here an show unavailable " + option_group_value.name);
+            disableSelectOption(dropdown_select,disable_type);
+          }
           if (num_options === 0 || product_iterator === num_sold_out || num_options === num_sold_out) {
             if (num_options === 0) {
               disable_type = "unavailable";
+              //console.log("num options==0 unavailable " + option_group_value.name);
             }
             if (product_iterator === num_sold_out || num_options === num_sold_out) {
               disable_type = "sold-out";
+              //console.log("sold-out " + option_group_value.name);
             }
             disableSelectOption(dropdown_select,disable_type);
           }
