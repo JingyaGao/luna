@@ -1,4 +1,4 @@
-function processProduct(product) {
+function processProductCustom(product) {
   if (product.has_option_groups) {
     disableAddButton("add-to-cart");
     setInitialProductOptionStatuses(product);
